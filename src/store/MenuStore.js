@@ -94,12 +94,12 @@ actions.SecondLevelClick = action((titleName) => {
         }
       }
     }
-    console.log('second chosen one ', JSON.parse(JSON.stringify(secondLevelObj)))
+    // console.log('second chosen one ', JSON.parse(JSON.stringify(secondLevelObj)))
   }
 })
 
 actions.FirstLevelChoose = action((labelName) => {
-  console.log('FirstLevel click triggered', labelName)
+  // console.log('FirstLevel click triggered', labelName)
   if (state.firstLevelChoose && state.firstLevelChoose === labelName) {
     state.firstLevelChoose = null
   } else {
@@ -108,7 +108,7 @@ actions.FirstLevelChoose = action((labelName) => {
 })
 
 actions.SecondLevelChoose = action((labelName) => {
-  console.log('SecondLevel click triggered', labelName)
+  // console.log('SecondLevel click triggered', labelName)
   state.secondLevelChoose = labelName
 })
 

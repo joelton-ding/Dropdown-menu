@@ -8,12 +8,8 @@ const HeaderMenu = observer(({ menuData }) => {
       {menuData.map((item, index) => {
         const { subList, expand } = item
         let classN = 'hidden'
-        if (subList !== undefined && subList.length > 0) {
-          if (expand === true) {
-            classN = 'open'
-          } else {
-            classN = 'close'
-          }
+        if (subList && subList.length > 0) {
+            classN = expand === true? 'open': 'close'
         }
         return (
           <li
@@ -37,44 +33,39 @@ const HeaderMenu = observer(({ menuData }) => {
   )
 })
 
-//Second Level LI
+// Second Level LI
 const MenuSecond = observer(({ item }) => {
   console.log('MenuSecond item', item)
   let topObject = JSON.parse(JSON.stringify(item))
-  let jsxSecondDisplay = null
-  let classN = 'hidden'
-  if (topObject.subList && topObject.subList.length > 0) {
-    if (topObject.expand === true) {
-      classN = 'open'
-    } else {
-      classN = 'close'
-    }
-  }
-  if (classN !== 'hidden') {
-    jsxSecondDisplay = topObject.subList.map((obj, index) => {
+  let jsxSecondDisplay = topObject.subList.map((obj, index) => {
+      const { thirdList, expand } = obj
+      let iconStyle = 'hidden'
+      if (thirdList && thirdList.length > 0) {
+          iconStyle = expand === true? 'open': 'close'
+        }
+      console.log('MenuSecond classN', obj, iconStyle)
       return (
         <li
-          className={classN}
+          className={iconStyle}
           key={index}
           onClick={() => { MenuStore.actions.SecondLevelClick(obj.title) }}
-        >
+          >
           <a href="#1">{obj.title}</a>
-          {
-            classN === 'open' &&
-            <ul className="nav-sub-third">
-              <MenuThird item={obj} />
-            </ul>
-          }
+          {/* { */}
+          {/* // classN === 'open' && */}
+          {/* <ul className="nav-sub-third"> */}
+          {/* // <MenuThird item={obj} /> */}
+          {/* // </ul> */}
+          {/* // } */}
         </li>
       )
     })
-  }
   return (<React.Fragment>{jsxSecondDisplay}</React.Fragment>)
 })
 
 const MenuThird = observer((param) => {
-  console.log(param)
-  console.log('Third param.item', param['item'])
+  // console.log(param)
+  // console.log('Third param.item', param['item'])
   let secondObj = JSON.parse(JSON.stringify(param['item']))
 
   let jsxThirdDisplay = null
@@ -89,7 +80,7 @@ const MenuThird = observer((param) => {
   } return (<React.Fragment>{jsxThirdDisplay}</React.Fragment>)
 })
 
-//Second Level LI
+// Second Level LI
 // const MenuSecond = observer((param) => {
 //   console.log('MenuSecond000 param.item', JSON.parse(JSON.stringify(param.item)))
 //   // console.log('MenuSecond param.isopen', param.isopen)
@@ -171,7 +162,7 @@ const MenuThird = observer((param) => {
 //   }
 // })
 
-//Third LI
+// Third LI
 // const MenuThirdLV = observer(({ thirdData }) => {
 //   const { thirdList } = thirdData
 //   if (thirdList && thirdList.length > 0) {
