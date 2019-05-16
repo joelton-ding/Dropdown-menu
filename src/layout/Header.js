@@ -9,7 +9,7 @@ const HeaderMenu = observer(({ menuData }) => {
         const { subList, expand } = item
         let classN = 'hidden'
         if (subList && subList.length > 0) {
-            classN = expand === true? 'open': 'close'
+          classN = expand === true ? 'open' : 'close'
         }
         return (
           <li
@@ -17,13 +17,14 @@ const HeaderMenu = observer(({ menuData }) => {
             key={index}
           >
             <a
-                href={item.url}
-                onClick={() => {
-                    MenuStore.actions.FirstLevelClick(item.title)}}
+              href={item.url}
+              onClick={() => {
+                MenuStore.actions.FirstLevelClick(item.title)
+              }}
             >{item.title}</a>
             {
               classN === 'open' &&
-              <ul>
+              <ul className="nav-sub">
                 <MenuSecond item={JSON.parse(JSON.stringify(item))} />
               </ul>
             }
@@ -38,43 +39,43 @@ const HeaderMenu = observer(({ menuData }) => {
 const MenuSecond = observer(({ item }) => {
   let topObject = JSON.parse(JSON.stringify(item))
   let jsxSecondDisplay = topObject.subList.map((obj, index) => {
-      const { thirdList, expand } = obj
-      let iconStyle = 'hidden'
-      if (thirdList && thirdList.length > 0) {
-          iconStyle = expand === true? 'open': 'close'
+    const { thirdList, expand } = obj
+    let iconStyle = 'hidden'
+    if (thirdList && thirdList.length > 0) {
+      iconStyle = expand === true ? 'open' : 'close'
+    }
+    // console.log('MenuSecond classN', obj, iconStyle)
+    return (
+      <li
+        className={iconStyle}
+        key={index}
+      >
+        <a
+          href="javascript:;"
+          onClick={() => { MenuStore.actions.SecondLevelClick(obj.title) }}
+        >{obj.title}</a>
+        {
+          iconStyle === 'open' &&
+          <ul className="nav-sub-third">
+            <MenuThird item={obj} />
+          </ul>
         }
-      // console.log('MenuSecond classN', obj, iconStyle)
-      return (
-        <li
-          className={iconStyle}
-          key={index}
-          >
-          <a
-              href="javascript:;"
-              onClick={() => { MenuStore.actions.SecondLevelClick(obj.title) }}
-          >{obj.title}</a>
-           {
-               iconStyle === 'open' &&
-               <ul className="nav-sub-third">
-                    <MenuThird item={obj} />
-                </ul>
-            }
-        </li>
-      )
-    })
+      </li>
+    )
+  })
   return (<React.Fragment>{jsxSecondDisplay}</React.Fragment>)
 })
 
 const MenuThird = observer((param) => {
   let secondObj = JSON.parse(JSON.stringify(param['item']))
   console.log('MenuThird secondObj', secondObj)
-    const { expand, thirdList, title } = secondObj
-    let jsxThirdItems = null;
+  const { expand, thirdList, title } = secondObj
+  let jsxThirdItems = null;
   if (expand === true) {
 
     if (thirdList && thirdList.length > 0) {
-        jsxThirdItems = thirdList.map((item, index) => {
-          console.log(' thirdList.map item', item)
+      jsxThirdItems = thirdList.map((item, index) => {
+        console.log(' thirdList.map item', item)
         return <li key={index}><a href='javascript:;'>{item.title}</a></li>
       })
     }

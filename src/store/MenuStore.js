@@ -19,11 +19,11 @@ const listData = [
       title: 'Corporate Info',
       expand: false,
       thirdList: [{
-        title: 'Corporate Profile',
+        title: '- Corporate Profile',
         url: 'corporate-profile'
       },
       {
-        title: 'Our Story',
+        title: '- Our Story',
         url: 'our-story',
       }]
     },
@@ -31,11 +31,11 @@ const listData = [
       title: 'Financial Info',
       expand: false,
       thirdList: [{
-        title: 'Financials',
+        title: '- Financials',
         url: 'financials'
       },
       {
-        title: 'Financial Highlights',
+        title: '- Financial Highlights',
         url: 'financial-highlights',
       }]
     }]
@@ -88,18 +88,18 @@ actions.FirstLevelClick = action((titleName) => {
 actions.SecondLevelClick = action((titleName) => {
   console.log('SecondLevelClick click titleName', titleName)
   let secondLevelObj = null;
-  state.menuData.map((lvOneObj)=>{
-    if(lvOneObj['subList'] && lvOneObj['subList'].length>0){
-        lvOneObj['subList'].map(lvTwoObj=>{
-            if(lvTwoObj['title'] === titleName){
-                lvTwoObj.expand = true;
-                secondLevelObj = lvTwoObj
-            }
-        })
+  state.menuData.map((lvOneObj) => {
+    if (lvOneObj['subList'] && lvOneObj['subList'].length > 0) {
+      lvOneObj['subList'].map(lvTwoObj => {
+        if (lvTwoObj['title'] === titleName) {
+          lvTwoObj.expand = true;
+          secondLevelObj = lvTwoObj
+        }
+      })
     }
   })
-    // console.log('second chosen one ', JSON.parse(JSON.stringify(secondLevelObj)))
-    console.log('state.menuData', JSON.parse(JSON.stringify(state.menuData)))
+  // console.log('second chosen one ', JSON.parse(JSON.stringify(secondLevelObj)))
+  console.log('state.menuData', JSON.parse(JSON.stringify(state.menuData)))
 })
 
 actions.FirstLevelChoose = action((labelName) => {
