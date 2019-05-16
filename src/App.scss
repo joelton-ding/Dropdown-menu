@@ -154,10 +154,15 @@ header {
               float: none;
               background: #0145ff;
               padding: 0;
+              border-bottom: 1px solid #fff;
+              &:last-child {
+                border: 0;
+              }
               &:hover {
                 background: #0033bf;
               }
               a {
+                border-bottom: none;
                 padding: 10px;
                 display: block;
                 &:after {
@@ -181,7 +186,6 @@ header {
                 display: block;
                 position: inherit;
                 margin-top: 0;
-                border-bottom: 1px solid #fff;
                 padding-bottom: 0;
                 .open {
                   a {
@@ -194,7 +198,6 @@ header {
                   }
                 }
                 .hidden {
-                  border: 1px solid red;
                   a {
                     &:before {
                       content: "";
@@ -204,12 +207,17 @@ header {
                   }
                 }
                 li {
+                  background: #666;
+                  border-bottom: 0;
                   &:hover {
                     background: #ccc;
                   }
-                  
                   a {
-                    padding: 5px 15px;
+                    border-top: 1px solid #e4d9c3;
+                    padding: 5px 10px;
+                    &:first-child {
+                      border-top: 1px solid #e4d9c3;
+                    }
                     &:before {
                       content: "+";
                       position: absolute;
@@ -224,6 +232,9 @@ header {
                       text-shadow: 0 1px 0 rgba(#000, .75);
                       text-align: center;
                       line-height: 15px;
+                      &:last-child {
+                        border-top: 0;
+                      }
                     }
                     &:after {
                       content: "";
@@ -234,18 +245,27 @@ header {
                 }
                 .nav-sub-third {
                   li {
-                    padding-left: 45px;
                     &:hover {
                       background: green;
                     }
                     a {
+                      padding: 5px 35px;
                       &:after {
                         content: "";
                         background: transparent;
                         box-shadow: none;
                       }
                       &:before {
-                        content: "";
+                        content: "\276F";
+                        position: absolute;
+                        left: 18px;
+                        top: 10px;
+                        font-size: 1em;
+                        vertical-align: middle;
+                        width: 1em;
+                        height: 1em;
+                        text-align: center;
+                        line-height: 15px;
                         background: transparent;
                         box-shadow: none;
                       }

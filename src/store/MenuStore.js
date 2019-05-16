@@ -19,11 +19,11 @@ const listData = [
       title: 'Corporate Info',
       expand: false,
       thirdList: [{
-        title: '- Corporate Profile',
+        title: 'Corporate Profile',
         url: 'corporate-profile'
       },
       {
-        title: '- Our Story',
+        title: 'Our Story',
         url: 'our-story',
       }]
     },
@@ -31,11 +31,11 @@ const listData = [
       title: 'Financial Info',
       expand: false,
       thirdList: [{
-        title: '- Financials',
+        title: 'Financials',
         url: 'financials'
       },
       {
-        title: '- Financial Highlights',
+        title: 'Financial Highlights',
         url: 'financial-highlights',
       }]
     }]
