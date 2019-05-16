@@ -87,7 +87,6 @@ actions.FirstLevelClick = action((titleName) => {
 
 actions.SecondLevelClick = action((titleName) => {
   console.log('SecondLevelClick click titleName', titleName)
-
   let secondLevelObj = null;
   state.menuData.map((lvOneObj)=>{
     if(lvOneObj['subList'] && lvOneObj['subList'].length>0){
@@ -100,7 +99,7 @@ actions.SecondLevelClick = action((titleName) => {
     }
   })
     // console.log('second chosen one ', JSON.parse(JSON.stringify(secondLevelObj)))
-    // console.log('state.menuData', JSON.parse(JSON.stringify(state.menuData)))
+    console.log('state.menuData', JSON.parse(JSON.stringify(state.menuData)))
 })
 
 actions.FirstLevelChoose = action((labelName) => {

@@ -53,12 +53,12 @@ const MenuSecond = observer(({ item }) => {
               href="javascript:;"
               onClick={() => { MenuStore.actions.SecondLevelClick(obj.title) }}
           >{obj.title}</a>
-           {/*{*/}
-               {/*iconStyle === 'open' &&*/}
+           {
+               iconStyle === 'open' &&
                <ul className="nav-sub-third">
                     <MenuThird item={obj} />
                 </ul>
-            {/*}*/}
+            }
         </li>
       )
     })
@@ -67,18 +67,19 @@ const MenuSecond = observer(({ item }) => {
 
 const MenuThird = observer((param) => {
   let secondObj = JSON.parse(JSON.stringify(param['item']))
+  console.log('MenuThird secondObj', secondObj)
+    const { expand, thirdList, title } = secondObj
+    let jsxThirdItems = null;
+  if (expand === true) {
 
-  let jsxThirdDisplay = null
-  if (param.expand === true) {
-    let thirdList = secondObj['thirdList']
-    let jsxThirdItem = null;
     if (thirdList && thirdList.length > 0) {
-        jsxThirdItem = thirdList.map((item, index) => {
+        jsxThirdItems = thirdList.map((item, index) => {
           console.log(' thirdList.map item', item)
         return <li key={index}><a href='javascript:;'>{item.title}</a></li>
       })
-    } return <span>{jsxThirdItem}</span>
-  } return (<React.Fragment>{jsxThirdDisplay}</React.Fragment>)
+    }
+  }
+  return (<React.Fragment>{jsxThirdItems}</React.Fragment>)
 })
 
 // Second Level LI
