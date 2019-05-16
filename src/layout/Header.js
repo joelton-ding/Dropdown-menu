@@ -15,11 +15,12 @@ const HeaderMenu = observer(({ menuData }) => {
           <li
             className={classN}
             key={index}
-            onClick={() => {
-              MenuStore.actions.FirstLevelClick(item.title)
-            }}
           >
-            <a href={item.url}>{item.title}</a>
+            <a
+                href={item.url}
+                onClick={() => {
+                    MenuStore.actions.FirstLevelClick(item.title)}}
+            >{item.title}</a>
             {
               classN === 'open' &&
               <ul>
@@ -42,20 +43,22 @@ const MenuSecond = observer(({ item }) => {
       if (thirdList && thirdList.length > 0) {
           iconStyle = expand === true? 'open': 'close'
         }
-      console.log('MenuSecond classN', obj, iconStyle)
+      // console.log('MenuSecond classN', obj, iconStyle)
       return (
         <li
           className={iconStyle}
           key={index}
-          onClick={() => { MenuStore.actions.SecondLevelClick(obj.title) }}
           >
-          <a href="javascript:;">{obj.title}</a>
+          <a
+              href="javascript:;"
+              onClick={() => { MenuStore.actions.SecondLevelClick(obj.title) }}
+          >{obj.title}</a>
            {/*{*/}
-            {/*classN === 'open' &&*/}
-           {/*<ul className="nav-sub-third">*/}
-            {/*<MenuThird item={obj} />*/}
-            {/*</ul>*/}
-           {/* }*/}
+               {/*iconStyle === 'open' &&*/}
+               <ul className="nav-sub-third">
+                    <MenuThird item={obj} />
+                </ul>
+            {/*}*/}
         </li>
       )
     })
@@ -63,17 +66,16 @@ const MenuSecond = observer(({ item }) => {
 })
 
 const MenuThird = observer((param) => {
-  // console.log(param)
-  // console.log('Third param.item', param['item'])
   let secondObj = JSON.parse(JSON.stringify(param['item']))
 
   let jsxThirdDisplay = null
   if (param.expand === true) {
-    let thirdList = secondObj['item']
+    let thirdList = secondObj['thirdList']
     let jsxThirdItem = null;
     if (thirdList && thirdList.length > 0) {
-      jsxThirdItem = thirdList.map((item, index) => {
-        return <li key={index}><a>{item.title}</a></li>
+        jsxThirdItem = thirdList.map((item, index) => {
+          console.log(' thirdList.map item', item)
+        return <li key={index}><a href='javascript:;'>{item.title}</a></li>
       })
     } return <span>{jsxThirdItem}</span>
   } return (<React.Fragment>{jsxThirdDisplay}</React.Fragment>)
@@ -188,7 +190,7 @@ const Header = () => {
           <nav className={effect} >
             <div className="hamburger" onClick={() => {
               AddEffect()
-              console.log('hamburger click')
+              // console.log('hamburger click')
             }}>
               <div className="line1" />
               <div className="line2" />
