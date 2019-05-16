@@ -193,6 +193,16 @@ header {
                     }
                   }
                 }
+                .hidden {
+                  border: 1px solid red;
+                  a {
+                    &:before {
+                      content: "";
+                      background: transparent;
+                          box-shadow: none;
+                    }
+                  }
+                }
                 li {
                   &:hover {
                     background: #ccc;
