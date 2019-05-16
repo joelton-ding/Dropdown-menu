@@ -68,6 +68,7 @@ const state = observable({
 const actions = {}
 
 actions.FirstLevelClick = action((titleName) => {
+  console.log('FirstLevelClick titleName', titleName)
   state.menuData.map(item => {
     if (item['subList'] && item['subList'].length > 0) {
       if (item.title === titleName && item.expand === false) {
@@ -82,20 +83,20 @@ actions.FirstLevelClick = action((titleName) => {
 })
 
 actions.SecondLevelClick = action((titleName) => {
+  console.log('SecondLevelClick click titleName', titleName)
   let secondLevelObj = null;
-  for (let i = 0; i < state.menuData.length; i++) {
-    let firstLevelObj = state.menuData[i];
-    if (firstLevelObj['subList'] && firstLevelObj.subList.length > 0) {
-      for (let j = 0; j < firstLevelObj.subList.length; j++) {
-        let secondLevel = firstLevelObj.subList.filter(obj => obj.title === titleName);
-        secondLevelObj = secondLevel && secondLevel.length > 0 ? secondLevel[0] : null;
-        if (secondLevelObj) {
-          secondLevelObj.expand = true
-        }
-      }
+  state.menuData.map((lvOneObj)=>{
+    if(lvOneObj['subList'] && lvOneObj['subList'].length>0){
+        lvOneObj['subList'].map(lvTwoObj=>{
+            if(lvTwoObj['title'] === titleName){
+                lvTwoObj.expand = true;
+                secondLevelObj = lvTwoObj
+            }
+        })
     }
-    // console.log('second chosen one ', JSON.parse(JSON.stringify(secondLevelObj)))
-  }
+  })
+    console.log('second chosen one ', JSON.parse(JSON.stringify(secondLevelObj)))
+    console.log('state.menuData', JSON.parse(JSON.stringify(state.menuData)))
 })
 
 actions.FirstLevelChoose = action((labelName) => {

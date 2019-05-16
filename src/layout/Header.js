@@ -35,7 +35,6 @@ const HeaderMenu = observer(({ menuData }) => {
 
 // Second Level LI
 const MenuSecond = observer(({ item }) => {
-  console.log('MenuSecond item', item)
   let topObject = JSON.parse(JSON.stringify(item))
   let jsxSecondDisplay = topObject.subList.map((obj, index) => {
       const { thirdList, expand } = obj
@@ -50,13 +49,13 @@ const MenuSecond = observer(({ item }) => {
           key={index}
           onClick={() => { MenuStore.actions.SecondLevelClick(obj.title) }}
           >
-          <a href="#1">{obj.title}</a>
-          {/* { */}
-          {/* // classN === 'open' && */}
-          {/* <ul className="nav-sub-third"> */}
-          {/* // <MenuThird item={obj} /> */}
-          {/* // </ul> */}
-          {/* // } */}
+          <a href="javascript:;">{obj.title}</a>
+           {/*{*/}
+            {/*classN === 'open' &&*/}
+           {/*<ul className="nav-sub-third">*/}
+            {/*<MenuThird item={obj} />*/}
+            {/*</ul>*/}
+           {/* }*/}
         </li>
       )
     })
