@@ -28,7 +28,12 @@ const listData = [
       }]
     },
     {
+      title: 'Google',
+      url: 'https://www.google.com/'
+    },
+    {
       title: 'Financial Info',
+      url: '',
       expand: false,
       thirdList: [{
         title: 'Financials',
@@ -92,8 +97,10 @@ actions.SecondLevelClick = action((titleName) => {
     if (lvOneObj['subList'] && lvOneObj['subList'].length > 0) {
       lvOneObj['subList'].map(lvTwoObj => {
         if (lvTwoObj['title'] === titleName) {
-          lvTwoObj.expand = true;
+          lvTwoObj.expand = lvTwoObj.expand ? false : true;
           secondLevelObj = lvTwoObj
+        } else {
+          lvTwoObj.expand = false
         }
       })
     }

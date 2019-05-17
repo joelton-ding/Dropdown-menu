@@ -39,7 +39,7 @@ const HeaderMenu = observer(({ menuData }) => {
 const MenuSecond = observer(({ item }) => {
   let topObject = JSON.parse(JSON.stringify(item))
   let jsxSecondDisplay = topObject.subList.map((obj, index) => {
-    const { thirdList, expand } = obj
+    const { thirdList, expand, url } = obj
     let iconStyle = 'hidden'
     if (thirdList && thirdList.length > 0) {
       iconStyle = expand === true ? 'open' : 'close'
@@ -51,7 +51,7 @@ const MenuSecond = observer(({ item }) => {
         key={index}
       >
         <a
-          href="javascript:;"
+          href={url || "javascript:"}
           onClick={() => { MenuStore.actions.SecondLevelClick(obj.title) }}
         >{obj.title}</a>
         {
@@ -69,115 +69,18 @@ const MenuSecond = observer(({ item }) => {
 const MenuThird = observer((param) => {
   let secondObj = JSON.parse(JSON.stringify(param['item']))
   console.log('MenuThird secondObj', secondObj)
-  const { expand, thirdList, title } = secondObj
+  const { expand, thirdList } = secondObj
   let jsxThirdItems = null;
   if (expand === true) {
-
     if (thirdList && thirdList.length > 0) {
       jsxThirdItems = thirdList.map((item, index) => {
-        console.log(' thirdList.map item', item)
-        return <li key={index}><a href='javascript:;'>{item.title}</a></li>
+        console.log('thirdList.map item', item)
+        return <li key={index}><a href={item.url}>{item.title}</a></li>
       })
     }
   }
   return (<React.Fragment>{jsxThirdItems}</React.Fragment>)
 })
-
-// Second Level LI
-// const MenuSecond = observer((param) => {
-//   console.log('MenuSecond000 param.item', JSON.parse(JSON.stringify(param.item)))
-//   // console.log('MenuSecond param.isopen', param.isopen)
-//   let topObject = JSON.parse(JSON.stringify(param.item))
-
-//   let jsxSecondDisplay = null
-
-//   if (param.subList && param.subList.length > 0) {
-//     if (topObject['subList'] && topObject['subList'].length > 0) {
-//       jsxSecondDisplay = topObject.subList.map((item, index) => {
-//         return (
-//           <li
-//             key={index}
-//             onClick={() => {
-
-//             }}
-//           >
-//             <a href="#1">{item.title}</a>
-//             <ul className="nav-sub-third">
-//               <MenuThird item={item['thirdList']} isOpen={classN === 'open' ? 'true' : 'false'} />
-//             </ul>
-//           </li>
-//         )
-//       })
-//     }
-//   }
-//   return (<React.Fragment>{jsxSecondDisplay}</React.Fragment>)
-// })
-
-// const MenuThird = observer((param) => {
-//   console.log(param)
-//   console.log('Third param.item', param['item'])
-//   console.log('Third param.isOPen', param['isOpen'])
-
-//   let jsxThirdDisplay = null
-//   if (param.isOpen === 'true') {
-//     let thirdList = param['item']
-//     let jsxThirdItem = null;
-//     if (thirdList && thirdList.length > 0) {
-//       jsxThirdItem = thirdList.map((item, index) => {
-//         return <li key={index}><a>{item.title}</a></li>
-//       })
-//     } return <span>{jsxThirdItem}</span>
-//   } return (<React.Fragment>{jsxThirdDisplay}</React.Fragment>)
-// })
-
-
-// Second Level LI
-// const MenuSecondLV = observer(({item}) => {
-//   const { subList = [], expand } = item;
-//   if (subList && subList.length > 0) {
-//     console.log(JSON.parse(JSON.stringify(subList)) + '=====')
-//     if (expand) {
-//       return (
-//         <React.Fragment>
-//           {
-//             subList.map((sLV, index) => {
-//               console.log('sLV: ', JSON.parse(JSON.stringify(sLV)))
-//               return (
-//                 <li key={index}>
-//                   <a href={sLV.url}>{sLV.title}</a>
-//                   {
-//                     sLV['thirdList'] && sLV['thirdList'].length > 0 &&
-//                     <ul className="nav-sub-third">
-//                       <MenuThirdLV thirdData={sLV} />
-//                     </ul>
-//                   }
-//                 </li>
-//               )
-//             })
-//           }
-//         </React.Fragment>
-//       )
-//     } else {
-//       return null
-//     }
-//   } else {
-//     return null
-//   }
-// })
-
-// Third LI
-// const MenuThirdLV = observer(({ thirdData }) => {
-//   const { thirdList } = thirdData
-//   if (thirdList && thirdList.length > 0) {
-//     return (
-//       <React.Fragment>
-//         {thirdList.map((list, index) => {
-//           return <li key={index}>{list.title}</li>
-//         })}
-//       </React.Fragment>
-//     )
-//   }
-// })
 
 const Header = () => {
   let { state: { effect, menuData }, actions: { AddEffect } } = MenuStore
@@ -190,10 +93,10 @@ const Header = () => {
         </div>
         <div className="nav-content">
           <nav className={effect} >
-            <div className="hamburger" onClick={() => {
-              AddEffect()
-              // console.log('hamburger click')
-            }}>
+            <div
+              className="hamburger" onClick={() => {
+                AddEffect()
+              }}>
               <div className="line1" />
               <div className="line2" />
               <div className="line3" />
